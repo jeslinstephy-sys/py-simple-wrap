@@ -206,3 +206,12 @@ class TestFilterCsvRows:
 
         with pytest.raises(ValueError):
             filter_csv_rows(str(csv_file), column="City", value="Nowhere")
+
+class TestCountCsvRows:
+    def test_count_rows(self, tmp_path):
+        csv_file = tmp_path / "people.csv"
+        write_people_csv(csv_file)
+
+        result = count_csv_rows(str(csv_file))
+
+        assert result == 3
